@@ -1,0 +1,55 @@
+{% load static tailwind_tags %}
+
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Blog</title>
+        {% tailwind_css %}
+    </head>
+    <body>
+        <div class style>
+            <div class="  bg-gray-100">
+
+                <div class="min-h-full">
+                    <!-- When the mobile menu is open, add `overflow-hidden` to the `body` element to prevent double scrollbars -->
+
+                    <!-- header -->
+                    {% include 'snippets/header.html' %}
+
+                    <div class="py-10">
+                        <div
+                            class="mx-auto max-w-3xl sm:px-6 lg:grid lg:max-w-7xl lg:grid-cols-12 lg:gap-8 lg:px-8">
+                            <div
+                                class="hidden lg:col-span-3 lg:block xl:col-span-2">
+
+                                <!-- nav -->
+                                {% include 'snippets/sidebar.html' %}
+
+                            </div>
+
+                            <!-- main -->
+                            {% block content %}
+
+                            {% endblock content %}
+
+                            <!-- aside -->
+                            {% block aside %}
+
+                            {% endblock aside %}
+                           
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script defer
+            src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+
+        <script type="text/javascript"
+            src="{% static 'js/alpine.js' %}"></script>
+    </body>
+</html>
+

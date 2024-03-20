@@ -1,0 +1,358 @@
+<div x-data="{ showModal: false }">
+  <!-- Tombol untuk membuka modal -->
+  <button @click="showModal = true" type="button"
+    class="rounded-xl w-full bg-white px-4 py-2.5 text-sm font-semibold text-gray-600 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50">Apa
+    yang anda pikirkan ?</button>
+
+  <!-- Modal -->
+  <div x-show="showModal" @click.away="showModal = false"
+    class="fixed z-10 inset-0 overflow-y-auto">
+    <div class="flex items-center justify-center min-h-screen">
+      <!-- Latar belakang modal -->
+      <div class="fixed inset-0 bg-black opacity-50"></div>
+
+      <!-- Konten modal -->
+      <form method="POST" enctype="multipart/form-data" class="space-y-4">
+        {% csrf_token %} {% if post %} <input type="hidden" name="id"
+          value="{{ post.id }}">
+        {% endif %}
+        <div
+          class="bg-white rounded-lg overflow-hidden transform transition-all sm:max-w-lg sm:w-full">
+          <!-- Tombol close -->
+          <div class="flex justify-end pt-4 pr-4">
+            <button @click="showModal = false" type="button"
+              class="text-gray-400 hover:text-gray-500 focus:outline-none">
+              <svg class="h-6 w-6" fill="none"
+                viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round"
+                  stroke-linejoin="round" stroke-width="2"
+                  d="M6 18L18 6M6 6l12 12"></path>
+              </svg>
+            </button>
+          </div>
+
+          <!-- Isi modal -->
+          <div class="px-4 pb-3">
+            <div class="text-center -mt-4">
+              <h3
+                class="text-base font-semibold leading-6 text-gray-900">Apa
+                yang anda pikirkan ?</h3>
+            </div>
+            <div>
+              <div class="mt-3 sm:mt-5">
+                <div class="mt-2">
+                  <div
+                    class="bg-white px-4 py-6 border-t sm:p-6">
+                    <article
+                      aria-labelledby="question-title-81614">
+                      <div class>
+                        <div class="flex space-x-3">
+                          <div
+                            class="flex-shrink-0">
+                            <img
+                              class="h-10 w-10 rounded-full"
+                              src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;auto=format&amp;fit=facearea&amp;facepad=2&amp;w=256&amp;h=256&amp;q=80"
+                              alt>
+                          </div>
+                          <div
+                            class="min-w-0 flex-1">
+                            <p
+                              class="text-sm font-medium text-gray-900">
+                              <a href="#"
+                                class="hover:underline">Dries
+                                Vincent</a>
+                            </p>
+                            <p
+                              class="text-sm text-gray-500">
+                              <a href="#"
+                                class="hover:underline">
+                                <time
+                                  datetime="2020-12-09T11:43:00">December
+                                  9 at
+                                  11:43
+                                  AM</time>
+                              </a>
+                            </p>
+                          </div>
+
+                          <!-- drop dwon visibility -->
+                          <div
+                            class="flex flex-shrink-0 self-center">
+                            <div
+                              class="mx-auto flex w-full max-w-xs justify-end">
+                              <div
+                                x-data="Components.listbox({ modelName: 'selected', open: false, selectedIndex: 0, activeIndex: 0, items: [{&quot;title&quot;:&quot;Published&quot;,&quot;description&quot;:&quot;This job posting can be viewed by anyone who has the link.&quot;,&quot;current&quot;:true},{&quot;title&quot;:&quot;Anonymous&quot;,&quot;description&quot;:&quot;This job posting will no longer be publicly accessible.&quot;,&quot;current&quot;:false}] })"
+                                x-init="init()">
+                                <label
+                                  id="listbox-label"
+                                  class="sr-only"
+                                  @click="$refs.button.focus()">Change
+                                  published
+                                  status</label>
+                                <div
+                                  class="relative">
+                                  <div
+                                    class="inline-flex divide-x divide-indigo-700 rounded-md border">
+                                    <div
+                                      class="inline-flex items-center gap-x-1.5 rounded-l-md bg-white px-3 py-1 text-gray-900 ">
+                                      <svg
+                                        class="-ml-0.5 h-5 w-5"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true">
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                          clip-rule="evenodd"></path>
+                                      </svg>
+                                      <p
+                                        x-text="selected.title"
+                                        class="text-sm font-semibold">Published</p>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      class="inline-flex items-center rounded-l-none rounded-r-md bg-indigo-600 p-2 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:ring-offset-2 focus:ring-offset-gray-50"
+                                      x-ref="button"
+                                      @keydown.arrow-up.stop.prevent="onButtonClick()"
+                                      @keydown.arrow-down.stop.prevent="onButtonClick()"
+                                      @click="onButtonClick()"
+                                      aria-haspopup="listbox"
+                                      :aria-expanded="open"
+                                      aria-labelledby="listbox-label">
+                                      <span
+                                        class="sr-only">Change
+                                        published
+                                        status</span>
+                                      <svg
+                                        class="h-5 w-5 text-white"
+                                        viewBox="0 0 20 20"
+                                        fill="currentColor"
+                                        aria-hidden="true">
+                                        <path
+                                          fill-rule="evenodd"
+                                          d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+                                          clip-rule="evenodd"></path>
+                                      </svg>
+                                    </button>
+                                  </div>
+
+                                  <ul
+                                    x-show="open"
+                                    x-transition:leave="transition ease-in duration-100"
+                                    x-transition:leave-start="opacity-100"
+                                    x-transition:leave-end="opacity-0"
+                                    class="absolute right-0 z-10 mt-2 w-72 origin-top-right divide-y divide-gray-200 overflow-hidden rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+                                    x-max="1"
+                                    @click.away="open = false"
+                                    x-description="Select popover, show/hide based on select state."
+                                    @keydown.enter.stop.prevent="onOptionSelect()"
+                                    @keydown.space.stop.prevent="onOptionSelect()"
+                                    @keydown.escape="onEscape()"
+                                    @keydown.arrow-up.prevent="onArrowUp()"
+                                    @keydown.arrow-down.prevent="onArrowDown()"
+                                    x-ref="listbox"
+                                    tabindex="-1"
+                                    role="listbox"
+                                    aria-labelledby="listbox-label"
+                                    :aria-activedescendant="activeDescendant"
+                                    aria-activedescendant
+                                    style="display: none;">
+                                    <li
+                                      x-state:on="Highlighted"
+                                      x-state:off="Not Highlighted"
+                                      class="cursor-default select-none p-4 text-sm text-gray-900"
+                                      x-description="Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation."
+                                      id="listbox-option-0"
+                                      role="option"
+                                      @click="choose(0)"
+                                      @mouseenter="onMouseEnter($event)"
+                                      @mousemove="onMouseMove($event, 0)"
+                                      @mouseleave="onMouseLeave($event)"
+                                      :class="{ 'bg-indigo-600 text-white': activeIndex === 0, 'text-gray-900': !(activeIndex === 0) }">
+                                      <div
+                                        class="flex flex-col">
+                                        <div
+                                          class="flex justify-between">
+                                          <p
+                                            x-state:on="Selected"
+                                            x-state:off="Not Selected"
+                                            class="font-semibold"
+                                            :class="{ 'font-semibold': selectedIndex === 0, 'font-normal': !(selectedIndex === 0) }">Published</p>
+                                          <span
+                                            x-description="Checkmark, only display for selected option."
+                                            x-state:on="Highlighted"
+                                            x-state:off="Not Highlighted"
+                                            class="text-indigo-600"
+                                            :class="{ 'text-white': activeIndex === 0, 'text-indigo-600': !(activeIndex === 0) }"
+                                            x-show="selectedIndex === 0">
+                                            <svg
+                                              class="h-5 w-5"
+                                              viewBox="0 0 20 20"
+                                              fill="currentColor"
+                                              aria-hidden="true">
+                                              <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"></path>
+                                            </svg>
+                                          </span>
+                                        </div>
+                                        <p
+                                          x-state:on="Highlighted"
+                                          x-state:off="Not Highlighted"
+                                          class="mt-2 text-gray-500"
+                                          :class="{ 'text-indigo-200': activeIndex === 0, 'text-gray-500': !(activeIndex === 0) }">This
+                                          job
+                                          posting
+                                          can
+                                          be
+                                          viewed
+                                          by
+                                          anyone
+                                          who
+                                          has
+                                          the
+                                          link.</p>
+                                      </div>
+                                    </li>
+                                    <li
+                                      x-state:on="Highlighted"
+                                      x-state:off="Not Highlighted"
+                                      class="cursor-default select-none p-4 text-sm text-gray-900"
+                                      x-description="Select option, manage highlight styles based on mouseenter/mouseleave and keyboard navigation."
+                                      id="listbox-option-1"
+                                      role="option"
+                                      @click="choose(1)"
+                                      @mouseenter="onMouseEnter($event)"
+                                      @mousemove="onMouseMove($event, 1)"
+                                      @mouseleave="onMouseLeave($event)"
+                                      :class="{ 'bg-indigo-600 text-white': activeIndex === 1, 'text-gray-900': !(activeIndex === 1) }">
+                                      <div
+                                        class="flex flex-col">
+                                        <div
+                                          class="flex justify-between">
+                                          <p
+                                            x-state:on="Selected"
+                                            x-state:off="Not Selected"
+                                            class="font-normal"
+                                            :class="{ 'font-semibold': selectedIndex === 1, 'font-normal': !(selectedIndex === 1) }">Anonymous</p>
+                                          <span
+                                            x-description="Checkmark, only display for selected option."
+                                            x-state:on="Highlighted"
+                                            x-state:off="Not Highlighted"
+                                            class="text-indigo-600"
+                                            :class="{ 'text-white': activeIndex === 1, 'text-indigo-600': !(activeIndex === 1) }"
+                                            x-show="selectedIndex === 1"
+                                            style="display: none;">
+                                            <svg
+                                              class="h-5 w-5"
+                                              viewBox="0 0 20 20"
+                                              fill="currentColor"
+                                              aria-hidden="true">
+                                              <path
+                                                fill-rule="evenodd"
+                                                d="M16.704 4.153a.75.75 0 01.143 1.052l-8 10.5a.75.75 0 01-1.127.075l-4.5-4.5a.75.75 0 011.06-1.06l3.894 3.893 7.48-9.817a.75.75 0 011.05-.143z"
+                                                clip-rule="evenodd"></path>
+                                            </svg>
+                                          </span>
+                                        </div>
+                                        <p
+                                          x-state:on="Highlighted"
+                                          x-state:off="Not Highlighted"
+                                          class="mt-2 text-gray-500"
+                                          :class="{ 'text-indigo-200': activeIndex === 1, 'text-gray-500': !(activeIndex === 1) }">This
+                                          job
+                                          posting
+                                          will
+                                          no
+                                          longer
+                                          be
+                                          publicly
+                                          accessible.</p>
+                                      </div>
+                                    </li>
+
+                                  </ul>
+
+                                </div>
+                              </div>
+
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+
+                      <!-- input untuk text postingan -->
+                      <div
+                        class="col-span-full mt-10">
+                        <div class="mt-2">
+                          <textarea id="about"
+                            name="about"
+                            rows="3"
+                            class="block w-full rounded-md border-0 py-1.5 px-2 text-gray-900 shadow-sm ring-1  ring-gray-300  sm:text-sm sm:leading-6 h-40"
+                            placeholder="Bicara itu hak! Apa yang anda pikirkan ?"></textarea>
+                        </div>
+                      </div>
+                    </article>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="border-t">
+
+              <div class=" mt-2">
+                <button type="button"
+                  onclick="document.getElementById('fileInput').click()"
+                  class="group -my-2 -ml-2 inline-flex items-center rounded-full px-3 py-2 text-left text-gray-400 cursor-pointer">
+                  <svg
+                    class="-ml-1 mr-2 h-5 w-5 group-hover:text-gray-500"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true">
+                    <path fill-rule="evenodd"
+                      d="M15.621 4.379a3 3 0 00-4.242 0l-7 7a3 3 0 004.241 4.243h.001l.497-.5a.75.75 0 011.064 1.057l-.498.501-.002.002a4.5 4.5 0 01-6.364-6.364l7-7a4.5 4.5 0 016.368 6.36l-3.455 3.553A2.625 2.625 0 119.52 9.52l3.45-3.451a.75.75 0 111.061 1.06l-3.45 3.451a1.125 1.125 0 001.587 1.595l3.454-3.553a3 3 0 000-4.242z"
+                      clip-rule="evenodd" />
+                  </svg>
+                  <span
+                    class="text-sm italic text-gray-500 group-hover:text-gray-600">attach
+                    an image</span>
+                </button>
+
+                <input type="file" id="fileInput"
+                  style="display: none;" accept="image/*">
+                <div id="imagePreviewContainer"
+                  class="mt-4">
+                  <img id="imagePreview" class="hidden"
+                    src="#" alt="Preview">
+                </div>
+
+                <script>
+                          document.getElementById('fileInput').addEventListener('change', function() {
+                              var file = this.files[0];
+                              if (file) {
+                                  var reader = new FileReader();
+                                  reader.onload = function(e) {
+                                      document.getElementById('imagePreview').src = e.target.result;
+                                      document.getElementById('imagePreview').classList.remove('hidden');
+                                  }
+                                  reader.readAsDataURL(file);
+                              }
+                          });
+                          </script>
+              </div>
+            </div>
+            <div class="mt-5">
+              <button type="submit"
+                class="mt-8 inline-flex w-full justify-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-indigo-600 hover:bg-indigo-500 sm:col-start-1 sm:mt-0"
+                @click="open = false">Posting</button>
+            </div>
+          </div>
+
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
